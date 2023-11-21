@@ -87,3 +87,35 @@ const addVideoStream = (video, stream) => {
     videoGrid.append(video);
   });
 };
+
+const muteAudio = document.getElementById("muteButton")
+const stopVideo = document.getElementById("stopVideo")
+muteAudio.addEventListener("click", () => {
+    const audioEnabled = myVideoStream.getAudioTracks()[0]
+    console.log(audioEnabled)
+    if (audioEnabled.enabled) {
+        audioEnabled.enabled = false
+        muteAudio.classList.toggle("background__red")
+        muteAudio.innerHTML = `<i class="fas fa-microphone-slash"></i>`
+    } else {
+        audioEnabled.enabled = true
+        muteAudio.classList.toggle("background__red")
+        muteAudio.innerHTML = `<i class="fas fa-microphone"></i>`
+    }
+    console.log(audioEnabled)
+})
+
+stopVideo.addEventListener("click", () => {
+    const videoEnabled = myVideoStream.getVideoTracks()[0]
+    console.log(videoEnabled)
+    if (videoEnabled.enabled) {
+        videoEnabled.enabled = false
+        stopVideo.classList.toggle("background__red")
+        stopVideo.innerHTML = `<i class="fa-solid fa-video-slash"></i>`
+    } else {
+        videoEnabled.enabled = true
+        stopVideo.classList.toggle("background__red")
+        stopVideo.innerHTML = `<i class="fa-solid fa-video"></i>`
+    }stopVideo
+    console.log(videoEnabled)
+})
