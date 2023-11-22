@@ -62,7 +62,7 @@ const getMediaStream = async () => {
       connectToNewUser(userId, stream);
     });
   } catch (error) {
-    console.error("Error accessing media devices:", error);
+    alert.error("Error accessing media devices:", error);
   }
 };
 
@@ -120,4 +120,31 @@ stopVideo.addEventListener("click", () => {
         stopVideo.innerHTML = `<i class="fa-solid fa-video"></i>`
     }stopVideo
     console.log(videoEnabled)
+})
+
+
+let text = document.getElementById("chat_message")
+let send = document.getElementById("send")
+let messages = document.querySelector(".messages")
+
+send.addEventListener("click", (e) => {
+    if (text.value.length !== 0) {
+        socket.emit("message", text.value)
+        text.value = ""
+    }
+})
+
+text.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && text.value.length !== 0) {
+        socket.emit("message", text.value)
+        text.value = ""
+    }
+})
+
+socket.on("createMessage", (message, userName) => {
+     messages.innerHTML += 
+    `<div class="message">
+        <b><i class="far fa-user-circle"></i> <span> ${userName === user ? "me": userName} </span> </b>
+        <span>${message}</span>
+    </div>`
 })
