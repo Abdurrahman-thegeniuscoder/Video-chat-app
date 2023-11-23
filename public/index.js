@@ -148,3 +148,9 @@ socket.on("createMessage", (message, userName) => {
         <span>${message}</span>
     </div>`
 })
+
+const inviteButton = document.querySelector("#inviteButton");
+
+inviteButton.addEventListener("click", () => {
+    prompt("Copy this link and send to your friend", location.href)
+})
